@@ -42,6 +42,7 @@ public class CRUDTest {
     @Test
     @Order(1) // Create
     void givenFilmData_whenCreate_shouldFilmExits() throws Exception{
+        fail();
         driver.get(baseUrl + createUrl);
         WebElement element = driver.findElement(By.name("Title"));
         element.sendKeys(film);
