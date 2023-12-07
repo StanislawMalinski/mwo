@@ -42,6 +42,7 @@ jobs:
   test:
     name: Health Check
     runs-on: ubuntu-latest
+    needs: [ frontend, backend ]
     steps:
     - name: Setup Java JDK
       uses: actions/setup-java@v4.0.0
@@ -49,7 +50,7 @@ jobs:
         # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
         java-version: 18.0.2
         # Java distribution. See the list of supported distributions in README file
-        # distribution: 
+        distribution: corretto
          
     - name: Running Tests
       run: |
