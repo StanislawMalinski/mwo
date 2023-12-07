@@ -1,0 +1,43 @@
+name: Health Check
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    name: SetUp Front
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' 
+
+    - name: Build&Run Frontend
+      run: |
+        dotnet build WebApp/WebApp.csproj
+        dotnet run --project WebApp/WebApp.csproj &
+
+    - name: Build&Run Backend
+      run: |
+        dotnet build Films/Films.csproj
+        dotnet run --project Films/Films.csproj &
+        
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4.0.0
+      with:
+        # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: 18
+        # Java distribution. See the list of supported distributions in README file
+        distribution: corretto
+         
+    - name: Running Tests
+      run: |
+        mvn clean install test -f pom.xml
+
+      
+        
