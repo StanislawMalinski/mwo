@@ -34,7 +34,14 @@ jobs:
         java-version: 18
         # Java distribution. See the list of supported distributions in README file
         distribution: corretto
-         
+        
+    - name: Setup Chrome
+      # You may pin to the exact commit or the version.
+      # uses: browser-actions/setup-chrome@52f10de5479c69bcbbab2eab094c9d373148005e
+      uses: browser-actions/setup-chrome@v1.4.0
+      #with:
+          # The Google Chrome/Chromium version to install and use.
+        # chrome-version: # optional, default is latest
     - name: Running Tests
       run: |
         mvn clean install test -f pom.xml
