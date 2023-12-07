@@ -34,7 +34,10 @@ jobs:
         java-version: 18
         # Java distribution. See the list of supported distributions in README file
         distribution: corretto
-         
+        
+    - name: Chrome/Chromedriver Matcher Action
+      uses: jamesmortensen/chromedriver-matcher-action@v1.0.1
+      
     - name: Running Tests
       run: |
         mvn clean install test -f pom.xml
