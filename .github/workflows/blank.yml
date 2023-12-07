@@ -6,7 +6,7 @@ on:
     branches: [ master ]
 jobs:
   build:
-    name: SetUp Front
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
