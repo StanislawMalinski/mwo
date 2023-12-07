@@ -35,16 +35,22 @@ jobs:
         # Java distribution. See the list of supported distributions in README file
         distribution: corretto
         
-    - name: Setup Chrome
-      # You may pin to the exact commit or the version.
-      # uses: browser-actions/setup-chrome@52f10de5479c69bcbbab2eab094c9d373148005e
-      uses: browser-actions/setup-chrome@v1.4.0
-      #with:
-          # The Google Chrome/Chromium version to install and use.
-        # chrome-version: # optional, default is latest
     - name: Running Tests
       run: |
         mvn clean install test -f pom.xml
 
-      
+    - name: Create an Azure DevOps Bug Workitem when a workflow fails
+      uses: stefanstranger/azuredevops-bug-action@1.1
+      if: failure()
+      with:
+        OrganizationName: "MWO-MFSW"
+        PAT: "PAT"
+        ProjectName: "MWO_Lab_1_Exercises_2"
+        AreaPath: "MWO_Lab_1_Exercises_2"
+        IterationPath: "MWO_Lab_1_Exercises_2"
+        GithubToken: "GithubToken"
+        WorkflowFileName: "blank.yml"
+      env:
+        PAT: ${{ secrets.PAT }}
+        GithubToken: ${{ secrets.githubtoken }}
         
