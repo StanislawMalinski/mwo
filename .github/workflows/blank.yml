@@ -36,8 +36,13 @@ jobs:
         distribution: corretto
         
     - name: Running Tests
+      env:
+        PAT: ${{ secrets.PAT }}
+        GithubToken: ${{ secrets.githubtoken }}
       run: |
         mvn clean install test -f pom.xml
+        echo "PAT"
+        echo "GithubToken"
 
     - name: Create an Azure DevOps Bug Workitem when a workflow fails
       uses: stefanstranger/azuredevops-bug-action@1.1
